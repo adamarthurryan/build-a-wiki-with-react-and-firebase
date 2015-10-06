@@ -1,17 +1,49 @@
 import Firebase from 'firebase';
 
-const post = (url, body) => fetch(url, {
-    method: 'POST',
-    credentials: 'include',
-    body: JSON.stringify(body || {}),
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
-}).then(res => res.json());
 
-export const signin = (username, password) => post('/api/signin', { username, password });
-export const signup = (username, password) => post('/api/signup', { username, password });
-export const signout = () => post('/api/signout');
+const fb = new Firebase('https://wicker-aarbrown.firebaseio.com/pages');
 
-export const pages = new Firebase('https://wicker-tuts.firebaseio.com/pages');
+export const pages = fb;
+
+export function getAuthData() {
+	return fb.getAuth();
+}
+
+export function onAuth(callback) {
+	return fb.onAuth(callback);
+} 
+
+export function offAuth(callback) {
+	return fb.offAuth(callback);
+}
+
+
+//sign in user with firebase
+export const signin = (email, password) => fb.authWithPassword(
+	{email, password},
+	function(error, authData) {
+		if (error)
+			console.log("Error signing user in:",  error);
+		else {
+			console.log("Successfully signed in with payload:", authData);
+		}
+	}
+);
+
+//sign up new user with firebase
+export const signup = (email, password) => fb.createUser(
+	{email, password}, 
+	function (error, userData) {
+		if (error) 
+			console.log("Error signing user up:" , error);
+		else {
+			console.log("Successfully created user account with uid:", userData.uid);
+			signin(email, password);
+		}
+	}
+);
+
+//sign out user with firebase
+export function signout() {
+	fb.unauth();
+}

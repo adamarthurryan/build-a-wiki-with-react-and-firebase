@@ -1,10 +1,10 @@
 {
-  "name": "wicker",
+  "name": "wicker-nobackend",
   "version": "1.0.0",
   "description": "A live collaborative wiki",
   "main": "server.js",
   "scripts": {
-    "build:js": "browserify ./src/app.js -t [ babelify --optional es7.classProperties ] --outfile public/all.js",
+    "build:js": "browserify ./src/app.js -d -t [ babelify --optional es7.classProperties ] --outfile public/all.js",
     "build": "watch \"npm run build:js\" ./src"
   },
   "author": "",
@@ -15,11 +15,6 @@
     "watch": "^0.16.0"
   },
   "dependencies": {
-    "body-parser": "^1.13.3",
-    "cookie-parser": "^1.3.5",
-    "ejs": "^2.3.3",
-    "express": "^4.13.3",
-    "express-session": "^1.11.3",
     "firebase": "^2.2.9",
     "markdown": "^0.5.0",
     "react": "^0.13.3",

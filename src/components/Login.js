@@ -3,9 +3,9 @@ import * as API from '../api';
 
 export default class Login extends React.Component {
     render() {
-        if (this.props.user)
-            return <div className='row'>
-                <p> Hi {this.props.user.username}! </p>
+        if (this.props.user.loggedin)
+            return <div className='row'> 
+                <p> Hi {this.props.user.email}! </p>
                 <p> <button onClick={this.signout}> Sign Out </button> </p>
             </div>;
 
@@ -24,7 +24,7 @@ export default class Login extends React.Component {
         var username = React.findDOMNode(this.refs.username).value,
             password = React.findDOMNode(this.refs.password).value;
 
-        API['sign' + name](username, password).then(data => this.props.setUser(data.user));
+        API['sign' + name](username, password);
     }
-    signout = evt => API.signout().then(data => this.props.setUser(null));
+    signout = evt => API.signout();
 }

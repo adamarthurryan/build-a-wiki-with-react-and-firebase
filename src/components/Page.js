@@ -35,7 +35,7 @@ export default class Page extends React.Component {
                             section={this.state.sections[id]} />)
             }
         
-            if (this.props.user)
+            if (this.props.user.loggedin)
                 sections.push(<p key='addSection'> 
                     <button onClick={this.addSection}> Add Section </button>
                 </p>);
@@ -45,7 +45,7 @@ export default class Page extends React.Component {
             <h1> {this.state.page.title || 'Loading...'} </h1>
             {sections}
         </article>;
-    }
+    } 
 
     addSection = evt => {
         let id;
@@ -58,7 +58,7 @@ export default class Page extends React.Component {
         }
 
         this.state.sections[id] = {
-            editor: this.props.user.username
+            editor: this.props.user.email
         }
 
         this.setState({
