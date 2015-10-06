@@ -1,4 +1,4 @@
-# [Building a Wiki With React and Firebase][published url]
+# Adapted from [Building a Wiki With React and Firebase][published url]
 ## Instructor: [Andrew Burgess][instructor url]
 
 
@@ -8,7 +8,9 @@ You'll also learn how to use Firebase, a cloud-hosted data backend for web and m
 
 ## Source Files Description
 
-This repository contains the source code for the completed course project - a multi-user collaborative wiki implemented with React and Firebase.
+This repository contains modified source code from the course project - a multi-user collaborative wiki implemented with React and Firebase.
+
+The wiki has been refactored to eliminate the necessity of a Node.js server. All user auth is now handled by Firebase.
 
 
 ------
